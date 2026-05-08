@@ -9,8 +9,14 @@ import org.springframework.kafka.config.TopicBuilder;
 public class KafkaTopicConfig {
 
     @Bean
-    public NewTopic strengthLensTopic(){
-        return TopicBuilder.name("strengthlens-workout")
+    public NewTopic strengthLensStringTopic(){
+        return TopicBuilder.name("strengthlens_string_topic")
+                .build();
+    }
+
+    @Bean
+    public NewTopic strengthLensJsonTopic(){
+        return TopicBuilder.name("strengthlens_json_topic")
                 .build();
     }
 }

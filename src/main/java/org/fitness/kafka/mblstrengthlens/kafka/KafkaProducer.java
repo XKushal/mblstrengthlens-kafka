@@ -2,9 +2,11 @@ package org.fitness.kafka.mblstrengthlens.kafka;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.fitness.kafka.mblstrengthlens.Model.User;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,10 +14,20 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class KafkaProducer {
 
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private KafkaTemplate<String, String> kafkaStringTemplate;
+    private KafkaTemplate<String, User> kafkaJsonTemplate;
 
-    public void sendMessage(String message){
-        log.info("Message sent {}", message);
-        kafkaTemplate.send("strengthlens-workout", message);
+    public void sendStringMessage(String message){
+        log.info("String Message sent {}", message);
+        kafkaStringTemplate.send("strengthlens_string_topic", message);
+    }
+
+    public void sendJsonMessage(User data){
+        log.info("Json Message sent {}", data.toString());
+        Message<User> message = MessageBuilder
+                .withPayload(data)
+                .setHeader(KafkaHeaders.TOPIC, "strengthlens_json_topic")
+                .build();
+        kafkaJsonTemplate.send(message);
     }
 }
