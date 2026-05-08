@@ -11,8 +11,8 @@
 	<groupId>org.fitness.kafka</groupId>
 	<artifactId>mblstrengthlens</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name/>
-	<description/>
+	<name>mblstrengthlens</name>
+	<description>strength lens Kafka project</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -20,6 +20,10 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>mblstrengthlens.wikimedia.producer</module>
+		<module>mblstrengthlens.wikimedia.consumer</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
@@ -42,7 +46,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -62,6 +66,19 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
